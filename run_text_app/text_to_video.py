@@ -7,7 +7,7 @@ TEXT_SPEED = 10
 
 
 def text_to_video(message: str, filename: str, width: int = 300, height: int = 100) -> None:
-    out = cv2.VideoWriter(f"{filename}.mp4", cv2.VideoWriter.fourcc(*'mp4v'), FRAMES_PER_SECOND, (width, height))
+    out = cv2.VideoWriter(filename, cv2.VideoWriter.fourcc(*'mp4v'), FRAMES_PER_SECOND, (width, height))
 
     frame = np.zeros((height, width, 3), dtype=np.uint8)
 
