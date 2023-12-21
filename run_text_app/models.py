@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+
+class VideoRequest(models.Model):
+    msg = models.CharField(max_length=30)

@@ -6,6 +6,7 @@
 </head>
 <h2>What message do you want?</h2>
 <form method="post" action="runtext/">
+    {% csrf_token %}
     <label for="message_id">Message:</label>
     <input type="text" name="message" id="message_id"/>
     <br/>
