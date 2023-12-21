@@ -1,5 +1,7 @@
 asgiref==3.7.2
 Django==5.0
+gunicorn==21.2.0
 numpy==1.26.2
 opencv-python==4.8.1.78
+packaging==23.2
 sqlparse==0.4.4
