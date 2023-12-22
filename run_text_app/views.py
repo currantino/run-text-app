@@ -3,7 +3,7 @@ import logging
 import os
 
 from django.conf import settings
-from django.http import HttpRequest, HttpResponse, HttpResponseNotAllowed, HttpResponseBadRequest
+from django.http import HttpRequest, HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import render
 from minio import Minio, S3Error
 
@@ -22,7 +22,8 @@ def run_text(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         form = MessageForVideoForm(request.POST)
         if not form.is_valid():
-            return HttpResponseBadRequest("Invalid form")
+            return render(request, "error.html",
+                          context={'message': 'Invalid form! Must not be longer than 30 characters'}, status=400)
 
         message = form.cleaned_data['message']
         req = VideoRequest.objects.create(msg=message)
@@ -79,7 +80,7 @@ def create_video_response(filename, video):
 
 
 def home(request: HttpRequest) -> HttpResponse:
-    return render(request, "home.html")
+    return render(request, "home.html", {'form': MessageForVideoForm()})
 
 
 def requests(request):

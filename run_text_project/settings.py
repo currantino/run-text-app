@@ -5,16 +5,21 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+MINIO_ACCESS_KEY = os.getenv("MINIO_ROOT_USER", "admin")
+MINIO_SECRET_KEY = os.getenv("MINIO_ROOT_PASSWORD", "password")
+MINIO_BUCKET_NAME = os.getenv("MINIO_BUCKET_NAME", "videos")
+MINIO_ENDPOINT = os.getenv("MINIO_ENDPOINT", "minio:9000")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-xfv+*q&6(vzrj3zg%(&cy=ym@v$z4r@_bk$dvb1g^5jz$y3bmn'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-xfv+*q&6(vzrj3zg%(&cy=ym@v$z4r@_bk$dvb1g^5jz$y3bmn')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG') is not None
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', os.getenv('DJANGO_ALLOWED_HOST')]
 
 # Application definition
 
@@ -64,8 +69,12 @@ WSGI_APPLICATION = 'run_text_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_NAME', 'postgres'),
+        'USER': os.getenv('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'password'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+        'PORT': os.getenv('POSTGRES_PORT', '5432')
     }
 }
 
