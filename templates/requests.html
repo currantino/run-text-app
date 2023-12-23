@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Received requests</h1>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <td>
+                id
+            </td>
+            <td>
+                message
+            </td>
+        </tr>
+        </thead>
+        {% for req in requests %}
+            <tr>
+                <td> {{ req.id }} </td>
+                <td> {{ req.msg }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}

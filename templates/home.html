@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>What message do you want?</h2>
+    <form method="post" action="runtext/">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-primary mb-2" type="submit" value="Submit"/>
+    </form>
+{% endblock %}
